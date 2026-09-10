@@ -1,4 +1,4 @@
-name: Build Royal Ksamil APK
+name: Build Royal Ksamil Live APK
 
 on:
   workflow_dispatch:
@@ -30,15 +30,11 @@ jobs:
         with:
           gradle-version: '8.10.2'
 
-      - name: Prepare Royal Ksamil Android project
+      - name: Create Android project
         run: |
           mkdir -p app/src/main/java/com/royalksamil/app
-          mkdir -p app/src/main/res/drawable
-          mkdir -p app/src/main/res/mipmap-hdpi
           mkdir -p app/src/main/res/values
-          mkdir -p app/src/main/assets/www
-          mkdir -p app/src/main/assets/www/upload
-          mkdir -p app/src/main/assets/www/generated_images
+          mkdir -p app/src/main/res/drawable
 
           cat > settings.gradle <<'EOF'
           pluginManagement {
@@ -80,8 +76,8 @@ jobs:
                   applicationId "com.royalksamil.app"
                   minSdk 26
                   targetSdk 35
-                  versionCode 1
-                  versionName "1.0.0"
+                  versionCode 2
+                  versionName "2.0.0"
               }
           }
           EOF
@@ -95,8 +91,7 @@ jobs:
                   android:theme="@style/AppTheme"
                   android:label="Royal Ksamil"
                   android:icon="@drawable/app_icon"
-                  android:allowBackup="true"
-                  android:supportsRtl="true">
+                  android:usesCleartextTraffic="true">
 
                   <activity
                       android:name=".MainActivity"
@@ -121,7 +116,6 @@ jobs:
           import android.webkit.WebSettings;
           import android.webkit.WebView;
           import android.webkit.WebViewClient;
-          import android.graphics.Color;
 
           public class MainActivity extends Activity {
               private WebView webView;
@@ -133,7 +127,6 @@ jobs:
                   webView = new WebView(this);
                   setContentView(webView);
 
-                  webView.setBackgroundColor(Color.rgb(2, 27, 44));
                   webView.setWebViewClient(new WebViewClient());
 
                   WebSettings settings = webView.getSettings();
@@ -142,9 +135,9 @@ jobs:
                   settings.setDatabaseEnabled(true);
                   settings.setAllowFileAccess(true);
                   settings.setAllowContentAccess(true);
-                  settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+                  settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
-                  webView.loadUrl("file:///android_asset/www/index.html");
+                  webView.loadUrl("https://royal-ksamil.ibotiran.chatgpt.site/");
               }
 
               @Override
@@ -162,11 +155,8 @@ jobs:
           <?xml version="1.0" encoding="utf-8"?>
           <resources>
               <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
-                  <item name="android:fontFamily">sans</item>
-                  <item name="android:windowActionModeOverlay">true</item>
-                  <item name="android:colorAccent">#00B9D6</item>
-                  <item name="android:navigationBarColor">#021B2C</item>
                   <item name="android:statusBarColor">#021B2C</item>
+                  <item name="android:navigationBarColor">#021B2C</item>
                   <item name="android:windowLightStatusBar">false</item>
               </style>
           </resources>
@@ -180,39 +170,20 @@ jobs:
               android:viewportWidth="108"
               android:viewportHeight="108">
 
-              <path
-                  android:fillColor="#021B2C"
-                  android:pathData="M0,0h108v108h-108z"/>
-
-              <path
-                  android:fillColor="#00B9D6"
-                  android:pathData="M18,63 C34,46 48,72 66,54 C78,42 88,47 96,39 L96,75 C75,90 39,91 18,75 Z"/>
-
-              <path
-                  android:fillColor="#F6C453"
-                  android:pathData="M54,19a12,12 0,1 0,0.1 0z"/>
+              <path android:fillColor="#021B2C" android:pathData="M0,0h108v108h-108z"/>
+              <path android:fillColor="#00B9D6" android:pathData="M18,63 C34,46 48,72 66,54 C78,42 88,47 96,39 L96,75 C75,90 39,91 18,75 Z"/>
+              <path android:fillColor="#F6C453" android:pathData="M54,19a12,12 0,1 0,0.1 0z"/>
           </vector>
           EOF
-
-          cp index.html app/src/main/assets/www/index.html
-          cp styles.css app/src/main/assets/www/styles.css
-          cp app.js app/src/main/assets/www/app.js
-
-          [ -f manifest.webmanifest ] && cp manifest.webmanifest app/src/main/assets/www/ || true
-          [ -f sw.js ] && cp sw.js app/src/main/assets/www/ || true
-
-          cp *.jpg app/src/main/assets/www/ 2>/dev/null || true
-          cp *.jpg app/src/main/assets/www/upload/ 2>/dev/null || true
-          cp *.jpg app/src/main/assets/www/generated_images/ 2>/dev/null || true
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
 
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk RoyalKsamil.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk RoyalKsamil-v2.apk
 
-      - name: Upload Royal Ksamil APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: RoyalKsamil-APK
-          path: RoyalKsamil.apk
+          name: RoyalKsamil-v2-APK
+          path: RoyalKsamil-v2.apk
