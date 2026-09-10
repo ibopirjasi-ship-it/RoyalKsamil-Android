@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#063f60" />
+  <title>Royal Ksamil</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app" class="app" data-screen="home">
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="shade" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button class="brand" data-go="home" aria-label="Royal Ksamil – Kryefaqja">
+        <img src="generated_images/exec-41b92365-322f-4210-a962-f832f66d09b6.png" alt="" />
+        <span>Royal Ksamil</span>
+      </button>
+      <button class="language" aria-label="Ndrysho gjuhën">SQ <span>⌄</span></button>
+    </header>
+
+    <section class="screen active" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">Mirë se vini në Jon</p>
+        <h1>Pushimet mbretërore fillojnë këtu.</h1>
+        <p class="lead">Qëndrime dhe eksperienca të zgjedhura në Ksamili.</p>
+      </div>
+      <div class="search-card glass">
+        <button class="field" data-go="stays"><span class="field-icon">⌖</span><span><small>Destinacioni</small><strong>Ksamil, Shqipëri</strong></span></button>
+        <div class="field-row">
+          <button class="field" data-go="stays"><span><small>Mbërritja</small><strong>Zgjidh datën</strong></span></button>
+          <button class="field" data-go="stays"><span><small>Largimi</small><strong>Zgjidh datën</strong></span></button>
+        </div>
+        <button class="primary" data-go="stays">Gjej akomodimin <span>→</span></button>
+      </div>
+      <button class="experience-link" data-go="experiences">Zbulo skafe, guida dhe eksperienca <span>→</span></button>
+    </section>
+
+    <section class="screen" id="stays">
+      <div class="screen-heading">
+        <button class="back" data-go="home">←</button>
+        <div><p class="eyebrow">Qëndrime</p><h2>Gjej vendin tënd</h2></div>
+      </div>
+      <div class="filter-row"><button class="chip active">Të gjitha</button><button class="chip">Apartamente</button><button class="chip">Vila</button></div>
+      <div class="cards">
+        <article class="property-card">
+          <div class="property-photo photo-one"><span class="badge">E rekomanduar</span><button class="heart">♡</button></div>
+          <div class="property-info"><div><h3>Ionian Pearl Villa</h3><p>Pranë detit · 4 persona</p></div><strong>€120<small>/natë</small></strong></div>
+        </article>
+        <article class="property-card compact">
+          <div class="property-photo photo-two"></div>
+          <div class="property-info"><div><h3>Blue Bay Studio</h3><p>Qendër · 2 persona</p></div><strong>€68<small>/natë</small></strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="screen" id="experiences">
+      <div class="screen-heading">
+        <button class="back" data-go="home">←</button>
+        <div><p class="eyebrow">Eksperienca</p><h2>Përjeto Ksamilin</h2></div>
+      </div>
+      <div class="feature glass">
+        <span class="feature-icon">⛵</span><div><small>Më e kërkuara</small><h3>Xhiro private me skaf</h3><p>Ishujt e Ksamilit dhe gjiret e fshehta</p></div><strong>nga €60</strong>
+      </div>
+      <div class="experience-grid">
+        <button class="mini-card"><span>🧭</span><strong>Guida lokale</strong><small>Zbulo historinë</small></button>
+        <button class="mini-card"><span>🤿</span><strong>Aktivitete detare</strong><small>Zhytje dhe kajak</small></button>
+        <button class="mini-card"><span>🍽️</span><strong>Gastronomi</strong><small>Shije autentike</small></button>
+        <button class="mini-card" data-go="partner"><span>＋</span><strong>Shto biznesin</strong><small>Bëhu partner</small></button>
+      </div>
+    </section>
+
+    <section class="screen" id="partner">
+      <div class="screen-heading">
+        <button class="back" data-go="experiences">←</button>
+        <div><p class="eyebrow">Royal Partner</p><h2>Rrit biznesin tënd</h2></div>
+      </div>
+      <form class="partner-form glass" id="partner-form">
+        <label>Çfarë dëshiron të regjistrosh?</label>
+        <div class="type-picker">
+          <button type="button" class="type active">🏠<span>Pronë</span></button>
+          <button type="button" class="type">⛵<span>Skaf</span></button>
+          <button type="button" class="type">🧭<span>Guidë</span></button>
+          <button type="button" class="type">✦<span>Tjetër</span></button>
+        </div>
+        <label>Emri i biznesit<input required placeholder="p.sh. Ksamil Blue Tours" /></label>
+        <label>Numri i telefonit<input required type="tel" placeholder="+355 ..." /></label>
+        <button class="primary" type="submit">Fillo regjistrimin <span>→</span></button>
+      </form>
+      <p class="trust">✓ Verifikim manual &nbsp; ✓ Mbështetje lokale &nbsp; ✓ Pagesa të sigurta</p>
+    </section>
+
+    <section class="screen" id="profile">
+      <div class="screen-heading"><button class="back" data-go="home">←</button><div><p class="eyebrow">Llogaria</p><h2>Mirë se erdhe</h2></div></div>
+      <div class="login glass"><button class="primary">Krijo llogari</button><button class="secondary">Hyr në llogari</button><p>Pronari ose biznesi? <button class="text-button" data-go="partner">Regjistrohu si partner</button></p></div>
+    </section>
+
+    <nav class="bottom-nav" aria-label="Navigimi kryesor">
+      <button data-go="home" class="active"><span>⌂</span>Kryefaqja</button>
+      <button data-go="stays"><span>⌕</span>Qëndrime</button>
+      <button data-go="experiences"><span>✦</span>Eksperienca</button>
+      <button data-go="profile"><span>♙</span>Profili</button>
+    </nav>
+
+    <div class="toast" id="toast">Kërkesa u regjistrua me sukses!</div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

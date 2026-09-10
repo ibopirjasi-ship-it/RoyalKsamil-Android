@@ -1,0 +1,9 @@
+{
+  "name": "Royal Ksamil",
+  "short_name": "Royal Ksamil",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#052d47",
+  "theme_color": "#063f60",
+  "description": "Qëndrime dhe eksperienca të zgjedhura në Ksamil."
+}
